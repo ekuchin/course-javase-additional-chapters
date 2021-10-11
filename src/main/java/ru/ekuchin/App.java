@@ -5,14 +5,14 @@ import ru.ekuchin.patterns.builder.TreeBuilder;
 import ru.ekuchin.patterns.factory_method.Transport;
 import ru.ekuchin.patterns.factory_method.City;
 import ru.ekuchin.patterns.factory_method.TransportFactory;
+import ru.ekuchin.patterns.proxy.CachedDataSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class App
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws Exception {
         System.out.println( "Hello Java!" );
 
 /*
@@ -27,6 +27,7 @@ public class App
         System.out.println(toParis.getCalculation(city2));
 */
 
+/*
         //Строитель
         TreeBuilder builder = new TreeBuilder();
         builder.addNode(new ArrayList<>(Arrays.asList(1, 2, 3)));
@@ -39,5 +40,15 @@ public class App
         builder.linkNodes(3,5);
         Tree tree = builder.serialize();
         System.out.println(tree.toString());
+*/
+        //Заместитель(Proxy)
+        CachedDataSource source = new CachedDataSource("Данные о котиках");
+        //Здесь задержки нет
+        System.out.println(source.getData());
+        source.setData("Данные о собачках");
+        //Здесь задержка
+        System.out.println(source.getData());
+
+        
     }
 }
