@@ -2,7 +2,7 @@ package ru.ekuchin;
 
 public class App
 {
-    public static void main( String[] args ) throws Exception {
+    public static void main( String[] args ){
         System.out.println( "Hello Java!" );
 
         //Фабрика
@@ -16,6 +16,5 @@ public class App
 
         //Наблюдатель (Observer)
         //Starter.demoPatternsObserver();
-
     }
 }
