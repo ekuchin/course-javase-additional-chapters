@@ -1,4 +1,4 @@
-package ru.ekuchin.patterns.factory_method;
+package ru.ekuchin.patterns.factory;
 
 public class TransportFactory {
 
