@@ -16,5 +16,8 @@ public class App
 
         //Наблюдатель (Observer)
         //Starter.demoPatternsObserver();
+
+        //Анализ файлов
+        Starter.demoFiles();
     }
 }

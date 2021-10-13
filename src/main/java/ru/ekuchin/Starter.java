@@ -1,5 +1,6 @@
 package ru.ekuchin;
 
+import ru.ekuchin.files.Analyzer;
 import ru.ekuchin.patterns.builder.Tree;
 import ru.ekuchin.patterns.builder.TreeBuilder;
 import ru.ekuchin.patterns.factory.City;
@@ -9,18 +10,22 @@ import ru.ekuchin.patterns.observer.Publisher;
 import ru.ekuchin.patterns.observer.Subscriber;
 import ru.ekuchin.patterns.proxy.CachedDataSource;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
 
 public class Starter {
     public static void demoPatternsFactory(){
         City city1 = new City("Tokyo", 6100);
         City city2 = new City("Paris", 4600);
 
-        Transport toTokio = TransportFactory.getTransport(city1);
+        Transport toTokyo = TransportFactory.getTransport(city1);
         Transport toParis = TransportFactory.getTransport(city2);
 
-        System.out.println(toTokio.getCalculation(city1));
+        System.out.println(toTokyo.getCalculation(city1));
         System.out.println(toParis.getCalculation(city2));
     }
     public static void demoPatternsBuilder(){
@@ -53,5 +58,21 @@ public class Starter {
         publisher.addSubscriber(subscriber2);
         publisher.setData("Changed payload");
     }
+    public static void demoFiles(){
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        try(InputStream input = classloader.getResourceAsStream("app.properties");){
+        //try (InputStream input = new FileInputStream("app.properties")) {
 
+            Properties props = new Properties();
+            props.load(new InputStreamReader(input, StandardCharsets.UTF_8));
+            Analyzer analyzer = new Analyzer(props);
+
+            File file = new File(props.getProperty("path"));
+            String report = analyzer.analyze(file, 0);
+            analyzer.writeLog(report,file.getName()+".html");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
