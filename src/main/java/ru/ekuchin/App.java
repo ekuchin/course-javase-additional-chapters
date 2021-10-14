@@ -18,6 +18,9 @@ public class App
         //Starter.demoPatternsObserver();
 
         //Анализ файлов
-        Starter.demoFiles();
+        //Starter.demoFiles();
+
+        //Лямбда-функции
+        Starter.demoLambda();
     }
 }

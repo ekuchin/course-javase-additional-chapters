@@ -1,6 +1,8 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
+import ru.ekuchin.lambda.Arithmetic;
+import ru.ekuchin.lambda.Calculator;
 import ru.ekuchin.patterns.builder.Tree;
 import ru.ekuchin.patterns.builder.TreeBuilder;
 import ru.ekuchin.patterns.factory.City;
@@ -11,7 +13,6 @@ import ru.ekuchin.patterns.observer.Subscriber;
 import ru.ekuchin.patterns.proxy.CachedDataSource;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +61,7 @@ public class Starter {
     }
     public static void demoFiles(){
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        try(InputStream input = classloader.getResourceAsStream("app.properties");){
+        try(InputStream input = classloader.getResourceAsStream("app.properties")){
         //try (InputStream input = new FileInputStream("app.properties")) {
 
             Properties props = new Properties();
@@ -74,5 +75,20 @@ public class Starter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void demoLambda(){
+        Arithmetic summ = (x, y)->x+y;
+        System.out.println( summ.getResult(10,20) );
+
+        Arithmetic division = (x, y)->{
+            return y == 0 ? 0 :x/y;
+        };
+        System.out.println( division.getResult(50,10) );
+
+        //получим лямбду из метода
+        Arithmetic action = Calculator.getAction(1);
+        //отправим ее в другой метод
+        System.out.println(Calculator.doAction(30,40, action));
+        System.out.println(Calculator.doAction(30,40, action));
     }
 }
