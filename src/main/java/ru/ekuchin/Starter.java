@@ -16,9 +16,8 @@ import ru.ekuchin.streamapi.CatCollection;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Starter {
@@ -100,8 +99,73 @@ public class Starter {
         //    System.out.println(cat);
         //}
 
-        CatCollection.getAsList().stream().forEach(System.out::println);
-        Arrays.stream(CatCollection.getAsArray()).forEach(System.out::println);
-        Stream.of(CatCollection.getAsArray()).forEach(System.out::println);
+        Stream<Cat> streamFromList =  CatCollection.getAsList().stream();
+        Stream<Cat> streamFromArray= Arrays.stream(CatCollection.getAsArray());
+        Stream<Cat> streamFromStatic = Stream.of(CatCollection.getAsArray());
+
+        Stream<Cat> streamSum = Stream.concat(streamFromList,Stream.concat(streamFromArray,streamFromStatic));
+
+        ArrayList<Cat> cats = CatCollection.getAsList();
+
+        //Класс Collectors
+        ArrayList<Cat> arrayListFromStream = cats.stream().collect(Collectors.toCollection(ArrayList::new));
+
+        List<Cat> listFromStream = cats.stream().collect(Collectors.toList());
+        Set<Cat> setFromStream = cats.stream().collect(Collectors.toSet());
+        Map<String, Integer> mapFromStream = cats.stream().collect(Collectors.toMap(Cat::getName, Cat::getWeight));
+
+        //Терминальные операторы
+        cats.stream().forEach(System.out::println);
+        System.out.printf("Всего у нас %d котов%n",cats.stream().count());
+
+        System.out.println(cats.stream().allMatch(Cat::isAngry));
+        System.out.println(cats.stream().anyMatch(c->c.getWeight()>5));
+        System.out.println(cats.stream().noneMatch(c->c.getBreed().equals("Шотландец")));
+
+        //Промежуточные операторы
+        cats.stream().distinct().forEach(System.out::println);
+
+        System.out.println("skip");
+        cats.stream().skip(1).forEach(System.out::println);
+
+        System.out.println("limit");
+        cats.stream().limit(1).forEach(System.out::println);
+
+        System.out.println("takeWhile");
+        cats.stream().takeWhile(Cat::isAngry).forEach(System.out::println);
+
+        System.out.println("dropWhile");
+        cats.stream().dropWhile(Cat::isAngry).forEach(System.out::println);
+
+        System.out.println("filter");
+        cats.stream().filter(c->c.getWeight()>5).forEach(System.out::println);
+
+        System.out.println("map");
+        cats.stream().map(Cat::getName).forEach(System.out::println);
+        System.out.println("flatMap");
+        cats.stream().flatMap(p->Stream.of(p.getName(),p.getBreed())).forEach(System.out::println);
+
+        System.out.println("sorted");
+        cats.stream().sorted((c,p)->c.getName().compareTo(p.getName())).forEach(System.out::println);
+        cats.stream().sorted((c,p)->c.getWeight()-p.getWeight()).forEach(System.out::println);
+
+        //Класс Optional
+/*
+        stream.findFirst()
+        stream.findAny()
+
+        stream.min()
+        stream.max()
+
+        stream.reduce()
+        stream.<Optional>.get
+
+ */
+        //Класс Optional, методы isPresent, orElse, ooElseGet, orElseThrow, ifPresent, ifPresentOrElse
+
+
+
+
+
     }
 }
