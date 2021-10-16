@@ -11,12 +11,15 @@ import ru.ekuchin.patterns.factory.TransportFactory;
 import ru.ekuchin.patterns.observer.Publisher;
 import ru.ekuchin.patterns.observer.Subscriber;
 import ru.ekuchin.patterns.proxy.CachedDataSource;
+import ru.ekuchin.streamapi.Cat;
+import ru.ekuchin.streamapi.CatCollection;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.stream.Stream;
 
 public class Starter {
     public static void demoPatternsFactory(){
@@ -90,5 +93,15 @@ public class Starter {
         //отправим ее в другой метод
         System.out.println(Calculator.doAction(30,40, action));
         System.out.println(Calculator.doAction(30,40, action));
+    }
+    public static void demoStreamAPI(){
+
+        //for (Cat cat: CatCollection.getAsArray()){
+        //    System.out.println(cat);
+        //}
+
+        CatCollection.getAsList().stream().forEach(System.out::println);
+        Arrays.stream(CatCollection.getAsArray()).forEach(System.out::println);
+        Stream.of(CatCollection.getAsArray()).forEach(System.out::println);
     }
 }

@@ -21,6 +21,10 @@ public class App
         //Starter.demoFiles();
 
         //Лямбда-функции
-        Starter.demoLambda();
+        //Starter.demoLambda();
+
+        //Stream API
+        Starter.demoStreamAPI();
+
     }
 }
