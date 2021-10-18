@@ -106,6 +106,7 @@ public class Starter {
         Stream<Cat> streamSum = Stream.concat(streamFromList,Stream.concat(streamFromArray,streamFromStatic));
 
         ArrayList<Cat> cats = CatCollection.getAsList();
+        ArrayList<Cat> emptyList = new ArrayList<>();
 
         //Класс Collectors
         ArrayList<Cat> arrayListFromStream = cats.stream().collect(Collectors.toCollection(ArrayList::new));
@@ -114,15 +115,17 @@ public class Starter {
         Set<Cat> setFromStream = cats.stream().collect(Collectors.toSet());
         Map<String, Integer> mapFromStream = cats.stream().collect(Collectors.toMap(Cat::getName, Cat::getWeight));
 
-        //Терминальные операторы
-        cats.stream().forEach(System.out::println);
-        System.out.printf("Всего у нас %d котов%n",cats.stream().count());
-
-        System.out.println(cats.stream().allMatch(Cat::isAngry));
-        System.out.println(cats.stream().anyMatch(c->c.getWeight()>5));
-        System.out.println(cats.stream().noneMatch(c->c.getBreed().equals("Шотландец")));
+        System.out.println("Группировка");
+        Map<Boolean, List<Cat>> catMap = cats.stream().collect(Collectors.groupingBy(c->c.isAngry()));
+        for(Map.Entry<Boolean, List<Cat>> item : catMap.entrySet()){
+            System.out.println(item.getKey());
+            for(Cat cat : item.getValue()){
+                System.out.println(cat.getName());
+            }
+        }
 
         //Промежуточные операторы
+        System.out.println("distinct");
         cats.stream().distinct().forEach(System.out::println);
 
         System.out.println("skip");
@@ -149,23 +152,30 @@ public class Starter {
         cats.stream().sorted((c,p)->c.getName().compareTo(p.getName())).forEach(System.out::println);
         cats.stream().sorted((c,p)->c.getWeight()-p.getWeight()).forEach(System.out::println);
 
+        //Терминальные операторы
+        cats.stream().forEach(System.out::println);
+        System.out.printf("Всего у нас %d котов%n",cats.stream().count());
+
+        System.out.println(cats.stream().allMatch(Cat::isAngry));
+        System.out.println(cats.stream().anyMatch(c->c.getWeight()>5));
+        System.out.println(cats.stream().noneMatch(c->c.getBreed().equals("Шотландец")));
+
         //Класс Optional
-/*
-        stream.findFirst()
-        stream.findAny()
+        System.out.println("optional");
 
-        stream.min()
-        stream.max()
+        System.out.println(emptyList.stream().findFirst().isPresent());
+        System.out.println(emptyList.stream().findFirst().orElse(new Cat("Багира", "Бурманская", 4, false)));
+        //System.out.println(emptyList.stream().findFirst().orElseThrow(Exception::new));
+        emptyList.stream().findAny().ifPresent(System.out::println);
+        emptyList.stream().findAny().ifPresentOrElse(System.out::println, ()->System.out.println("Нет котов"));
 
-        stream.reduce()
-        stream.<Optional>.get
+        //Терминальные операторы, возвращающие Optional
+        System.out.println(cats.stream().min((c,p)->c.getWeight()-p.getWeight()));
+        System.out.println(cats.stream().max((c,p)->c.getWeight()-p.getWeight()));
 
- */
-        //Класс Optional, методы isPresent, orElse, ooElseGet, orElseThrow, ifPresent, ifPresentOrElse
+        cats.stream().min((c,p)->c.getWeight()-p.getWeight()).ifPresent(System.out::println);
 
-
-
-
-
+        System.out.println("reduce");
+        cats.stream().map(Cat::getWeight).reduce(Integer::sum).ifPresent(System.out::println);
     }
 }
