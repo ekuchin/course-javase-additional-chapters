@@ -1,6 +1,7 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
+import ru.ekuchin.javadoc.DocumendedCat;
 import ru.ekuchin.lambda.Arithmetic;
 import ru.ekuchin.lambda.Calculator;
 import ru.ekuchin.patterns.builder.Tree;
@@ -177,5 +178,10 @@ public class Starter {
 
         System.out.println("reduce");
         cats.stream().map(Cat::getWeight).reduce(Integer::sum).ifPresent(System.out::println);
+    }
+    public static void demoJavadoc(){
+        DocumendedCat cat = new DocumendedCat("Мурзик", "Манул", 10,true);
+        cat.sleep(1);
+        cat.sleep(2);
     }
 }

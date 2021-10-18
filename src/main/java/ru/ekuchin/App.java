@@ -24,7 +24,10 @@ public class App
         //Starter.demoLambda();
 
         //Stream API
-        Starter.demoStreamAPI();
+        //Starter.demoStreamAPI();
+
+        //Javadoc
+        Starter.demoJavadoc();
 
     }
 }
