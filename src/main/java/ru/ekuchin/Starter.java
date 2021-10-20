@@ -4,6 +4,8 @@ import ru.ekuchin.files.Analyzer;
 import ru.ekuchin.javadoc.DocumendedCat;
 import ru.ekuchin.lambda.Arithmetic;
 import ru.ekuchin.lambda.Calculator;
+import ru.ekuchin.packages.HandlerQueue;
+import ru.ekuchin.packages.HandlerStack;
 import ru.ekuchin.patterns.builder.Tree;
 import ru.ekuchin.patterns.builder.TreeBuilder;
 import ru.ekuchin.patterns.factory.City;
@@ -17,6 +19,9 @@ import ru.ekuchin.streamapi.CatCollection;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -96,9 +101,11 @@ public class Starter {
     }
     public static void demoStreamAPI(){
 
-        //for (Cat cat: CatCollection.getAsArray()){
-        //    System.out.println(cat);
-        //}
+        /*
+        for (Cat cat: CatCollection.getAsArray()){
+            System.out.println(cat);
+        }
+        */
 
         Stream<Cat> streamFromList =  CatCollection.getAsList().stream();
         Stream<Cat> streamFromArray= Arrays.stream(CatCollection.getAsArray());
@@ -183,5 +190,53 @@ public class Starter {
         DocumendedCat cat = new DocumendedCat("Мурзик", "Манул", 10,true);
         cat.sleep(1);
         cat.sleep(2);
+    }
+    public static void demoStandardPackages(){
+        //Regexp
+        // 10 или 12 цифр
+        String regexp = "\\d{10}|\\d{12}";
+        System.out.println("123456789101".matches(regexp));
+        System.out.println("1234567890".matches(regexp));
+
+        //Цифры, буквы и точка
+        regexp = "[.A-Za-zА-Яа-я0-9]*";
+        System.out.println("meekuchin.ru".matches(regexp));
+        System.out.println("me@ekuchin.ru".matches(regexp));
+
+        //Email
+        regexp = "[A-Za-z0-9]*@[A-Za-z0-9]*.[A-Za-z0-9]{2}|[A-Za-z0-9]*@[A-Za-z0-9]*.[A-Za-z0-9]{3}";
+        System.out.println("me@ekuchin.ru".matches(regexp));
+
+        //Коллекции
+        String[] arr = {"Первый","Второй","Третий","Четвертый","Пятый","Шестой"};
+        HandlerQueue<String> queue = new HandlerQueue<>();
+        for(int i=0;i<6;i++){
+            queue.receive(arr[i]);
+            if(i%2!=0){
+                queue.handle();
+            }
+        }
+        System.out.println(queue.toString());
+
+        HandlerStack<String> stack = new HandlerStack<>();
+        for(int i=0;i<6;i++){
+            stack.receive(arr[i]);
+            if(i%2!=0){
+                stack.handle();
+            }
+        }
+        System.out.println(stack.toString());
+
+        //Дата-время
+        System.out.println("Дата-время");
+        LocalDate today = LocalDate.now();
+        LocalDate myBirthday = LocalDate.of(1975, Month.MAY, 31);
+        long myAge = ChronoUnit.DAYS.between(myBirthday, today);
+        System.out.println(myAge);
+
+        long nextThousand = ((myAge / 1000)+1)*1000;
+        System.out.println(myBirthday.plus(nextThousand, ChronoUnit.DAYS));
+
+
     }
 }

@@ -27,7 +27,9 @@ public class App
         //Starter.demoStreamAPI();
 
         //Javadoc
-        Starter.demoJavadoc();
+        //Starter.demoJavadoc();
 
+        //Стандартные пакеты и классы
+        Starter.demoStandardPackages();
     }
 }
