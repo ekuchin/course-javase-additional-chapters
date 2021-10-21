@@ -1,5 +1,7 @@
 package ru.ekuchin;
 
+import ru.ekuchin.streamapi.Cat;
+
 public class App
 {
     public static void main( String[] args ){

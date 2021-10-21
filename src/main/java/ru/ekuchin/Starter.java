@@ -18,6 +18,8 @@ import ru.ekuchin.streamapi.Cat;
 import ru.ekuchin.streamapi.CatCollection;
 
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Month;
@@ -230,13 +232,27 @@ public class Starter {
         //Дата-время
         System.out.println("Дата-время");
         LocalDate today = LocalDate.now();
-        LocalDate myBirthday = LocalDate.of(1975, Month.MAY, 31);
+        LocalDate myBirthday = LocalDate.of(1978, Month.NOVEMBER, 14);
         long myAge = ChronoUnit.DAYS.between(myBirthday, today);
         System.out.println(myAge);
 
         long nextThousand = ((myAge / 1000)+1)*1000;
         System.out.println(myBirthday.plus(nextThousand, ChronoUnit.DAYS));
 
+        //Runtime & Reflection
+        Runtime runtime = Runtime.getRuntime();
+        System.out.println(runtime.availableProcessors());
+        System.out.println(runtime.freeMemory());
+        System.out.println(runtime.maxMemory());
 
+        Cat cat = new Cat("Мурзик", "Манул",10, true);
+        Class catClass = cat.getClass();
+        for(Method method:catClass.getMethods()){
+            System.out.println(method.toString());
+        }
+        System.out.println("Fields");
+        for(Field field:catClass.getDeclaredFields()){
+            System.out.println(field.toString());
+        }
     }
 }
