@@ -1,6 +1,8 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
+import ru.ekuchin.filetypes.XmlCat;
+import ru.ekuchin.filetypes.XmlCatBuilder;
 import ru.ekuchin.javadoc.DocumendedCat;
 import ru.ekuchin.lambda.Arithmetic;
 import ru.ekuchin.lambda.Calculator;
@@ -255,4 +257,12 @@ public class Starter {
             System.out.println(field.toString());
         }
     }
+    public static void demoFileTypes() throws Exception {
+        XmlCat[] cats = XmlCatBuilder.readXML("src/main/resources/cats.xml");
+        Arrays.stream(cats).forEach(System.out::println);
+
+        XmlCatBuilder.writeXml(cats, "src/main/resources/newcat.xml");
+
+    }
+
 }

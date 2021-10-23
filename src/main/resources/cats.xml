@@ -1,0 +1,20 @@
+<cats>
+    <cat>
+        <name>Мурзик</name>
+        <breed>Манул</breed>
+        <weight>10</weight>
+        <isAngry>true</isAngry>
+    </cat>
+    <cat>
+        <name>Рамзес</name>
+        <breed>Сфинкс</breed>
+        <weight>2</weight>
+        <isAngry>true</isAngry>
+    </cat>
+    <cat>
+        <name>Эдуард</name>
+        <breed>Британец</breed>
+        <weight>5</weight>
+        <isAngry>false</isAngry>
+    </cat>
+</cats>

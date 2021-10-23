@@ -4,7 +4,7 @@ import ru.ekuchin.streamapi.Cat;
 
 public class App
 {
-    public static void main( String[] args ){
+    public static void main( String[] args ) throws Exception {
         System.out.println( "Hello Java!" );
 
         //Фабрика
@@ -32,6 +32,9 @@ public class App
         //Starter.demoJavadoc();
 
         //Стандартные пакеты и классы
-        Starter.demoStandardPackages();
+        //Starter.demoStandardPackages();
+
+        //Работа с XML, JSON, Excel, Zip
+        Starter.demoFileTypes();
     }
 }
