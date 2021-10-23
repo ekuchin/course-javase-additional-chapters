@@ -8,9 +8,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 public class XmlCatBuilder {
@@ -60,4 +62,14 @@ public class XmlCatBuilder {
         StreamResult result = new StreamResult(new File(filename));
         transformer.transform(source, result);
     }
+
+    public static void transformXml(String sourceFileName, String xslFileName, String outFileName) throws Exception {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        StreamSource xslt = new StreamSource(new File(xslFileName));
+        Transformer transformer = factory.newTransformer(xslt);
+
+        StreamSource text = new StreamSource(new File(sourceFileName));
+        transformer.transform(text, new StreamResult(new File(outFileName)));
+    }
+
 }
