@@ -261,11 +261,16 @@ public class Starter {
         XmlCat[] cats = XmlCatBuilder.readXML("src/main/resources/cats.xml");
         Arrays.stream(cats).forEach(System.out::println);
 
-        //XmlCatBuilder.writeXml(cats, "src/main/resources/newcat.xml");
+        /*
+        XmlCatBuilder.writeXml(cats, "src/main/resources/newcat.xml");
         XmlCatBuilder.transformXml("src/main/resources/cats.xml",
                 "src/main/resources/cats.xsl",
                 "src/main/resources/cats.html");
+         */
+
+        System.out.println(XmlCatBuilder.validateXml(
+                "src/main/resources/cats.xml",
+                "src/main/resources/cats.xsd"));
 
     }
-
 }

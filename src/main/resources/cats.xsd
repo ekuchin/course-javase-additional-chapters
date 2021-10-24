@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">  
+  <xs:element name='cats'>
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name='cat' minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name='name' minOccurs="0"/>
+                        <xs:element name='breed' minOccurs="0"/>
+                        <xs:element name='weight' minOccurs="0"/>
+                        <xs:element name='isAngry' minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+		</xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
