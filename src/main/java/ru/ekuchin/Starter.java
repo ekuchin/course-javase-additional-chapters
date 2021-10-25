@@ -1,6 +1,7 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
+import ru.ekuchin.filetypes.json.JacksonCat;
 import ru.ekuchin.filetypes.json.JsonPCat;
 import ru.ekuchin.filetypes.json.JsonCatBuilder;
 import ru.ekuchin.filetypes.xml.JaxbCatCollection;
@@ -285,5 +286,10 @@ public class Starter {
         cats.forEach(System.out::println);
 
         JsonCatBuilder.writeJson(cats, "src/main/resources/newcat.json");
+
+        System.out.println("Jackson");
+        JacksonCat[] jacksonCats = JsonCatBuilder.readJackson("src/main/resources/cats.json");
+        Arrays.stream(jacksonCats).forEach(System.out::println);
+        JsonCatBuilder.writeJackson(jacksonCats, "src/main/resources/newcat.json");
     }
 }

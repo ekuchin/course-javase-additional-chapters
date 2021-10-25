@@ -1,8 +1,14 @@
 package ru.ekuchin.filetypes.json;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.json.*;
 import javax.json.stream.JsonParser;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class JsonCatBuilder {
@@ -36,5 +42,18 @@ public class JsonCatBuilder {
             arr.add(obj);
         }
         System.out.println(arr.build().toString());
+    }
+
+    public static JacksonCat[] readJackson(String filename) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(new File(filename), JacksonCat[].class);
+    }
+
+    public static void writeJackson(JacksonCat[] cats, String filename) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(cats);
+        try (PrintWriter out = new PrintWriter(filename)) {
+            out.println(jsonString);
+        }
     }
 }
