@@ -103,16 +103,14 @@ public class XmlCatBuilder {
                 new FileInputStream(filename), StandardCharsets.UTF_8));
     }
 
-    public void writeJaxb(JaxbCatCollection cats, String filename) throws Exception {
+    public static void writeJaxb(JaxbCatCollection cats, String filename) throws Exception {
 
         JAXBContext context = JAXBContext.newInstance(JaxbCatCollection.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        // записать System.out
-        marshaller.marshal(cats, System.out);
-        // Из контекста получаем маршалер с помощью createMarshaller().
-        // устанавливаем свойство для получения форматированного вывода.
-        //m.marshal(bookstore, new File(BOOKSTORE_XML));
+        // Можно записать в System.out
+        //marshaller.marshal(cats, System.out);
+        marshaller.marshal(cats, new File(filename));
     }
 
 }

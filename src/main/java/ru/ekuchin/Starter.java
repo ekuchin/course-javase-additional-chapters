@@ -2,6 +2,7 @@ package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
 import ru.ekuchin.filetypes.JaxbCat;
+import ru.ekuchin.filetypes.JaxbCatCollection;
 import ru.ekuchin.filetypes.XmlCat;
 import ru.ekuchin.filetypes.XmlCatBuilder;
 import ru.ekuchin.javadoc.DocumendedCat;
@@ -45,11 +46,11 @@ public class Starter {
     public static void demoPatternsBuilder(){
         TreeBuilder builder = new TreeBuilder();
         builder.addNode(new ArrayList<>(Arrays.asList(1, 2, 3)));
-        builder.addNode(new ArrayList<Integer>());
+        builder.addNode(new ArrayList<>());
         builder.addNode(new ArrayList<>(Arrays.asList(4, 5)));
-        builder.addNode(new ArrayList<Integer>());
-        builder.addNode(new ArrayList<Integer>());
-        builder.addNode(new ArrayList<Integer>());
+        builder.addNode(new ArrayList<>());
+        builder.addNode(new ArrayList<>());
+        builder.addNode(new ArrayList<>());
         builder.linkNodes(1,4);
         builder.linkNodes(3,5);
         Tree tree = builder.serialize();
@@ -262,7 +263,6 @@ public class Starter {
         XmlCat[] cats = XmlCatBuilder.readXML("src/main/resources/cats.xml");
         Arrays.stream(cats).forEach(System.out::println);
 
-        /*
         XmlCatBuilder.writeXml(cats, "src/main/resources/newcat.xml");
         XmlCatBuilder.transformXml("src/main/resources/cats.xml",
                 "src/main/resources/cats.xsl",
@@ -272,16 +272,11 @@ public class Starter {
                 "src/main/resources/cats.xml",
                 "src/main/resources/cats.xsd"));
 
-        XmlCatBuilder.readJaxb("src/main/resources/cats.xml").getCats().stream().forEach(
-                System.out::println
-        );
-         */
+        //Jaxb
+        System.out.println("Jaxb");
+        JaxbCatCollection catsCollection = XmlCatBuilder.readJaxb("src/main/resources/cats.xml");
+        catsCollection.getCats().forEach(System.out::println);
 
-        JaxbCat murzik = new JaxbCat("Мурзик","Манул", 10, true);
-        JaxbCat ramzes = new JaxbCat("Рамзес","Сфинкс", 2, true);
-        JaxbCat edward = new JaxbCat("Эдуард","Британец", 5, false);
-        ArrayList<JaxbCat> jaxbCats = new ArrayList<JaxbCat>();
-        //jaxbCats.
-
+        XmlCatBuilder.writeJaxb(catsCollection,"src/main/resources/newcat.xml");
     }
 }
