@@ -1,4 +1,4 @@
-package ru.ekuchin.filetypes;
+package ru.ekuchin.filetypes.xml;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

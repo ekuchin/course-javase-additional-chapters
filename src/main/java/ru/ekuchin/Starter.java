@@ -1,10 +1,9 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
-import ru.ekuchin.filetypes.JaxbCat;
-import ru.ekuchin.filetypes.JaxbCatCollection;
-import ru.ekuchin.filetypes.XmlCat;
-import ru.ekuchin.filetypes.XmlCatBuilder;
+import ru.ekuchin.filetypes.xml.JaxbCatCollection;
+import ru.ekuchin.filetypes.xml.XmlCat;
+import ru.ekuchin.filetypes.xml.XmlCatBuilder;
 import ru.ekuchin.javadoc.DocumendedCat;
 import ru.ekuchin.lambda.Arithmetic;
 import ru.ekuchin.lambda.Calculator;

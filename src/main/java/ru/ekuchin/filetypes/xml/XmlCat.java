@@ -1,4 +1,4 @@
-package ru.ekuchin.filetypes;
+package ru.ekuchin.filetypes.xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
