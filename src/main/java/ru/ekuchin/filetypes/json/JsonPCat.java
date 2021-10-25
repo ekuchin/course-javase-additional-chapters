@@ -1,12 +1,12 @@
 package ru.ekuchin.filetypes.json;
 
-public class JsonCat {
+public class JsonPCat {
     private String name;
     private String breed;
     private int weight;
     private boolean isAngry;
 
-    public JsonCat(String name, String breed, int weight, boolean isAngry) {
+    public JsonPCat(String name, String breed, int weight, boolean isAngry) {
         this.name = name;
         this.breed = breed;
         this.weight = weight;
