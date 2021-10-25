@@ -1,6 +1,7 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
+import ru.ekuchin.filetypes.JaxbCat;
 import ru.ekuchin.filetypes.XmlCat;
 import ru.ekuchin.filetypes.XmlCatBuilder;
 import ru.ekuchin.javadoc.DocumendedCat;
@@ -266,11 +267,21 @@ public class Starter {
         XmlCatBuilder.transformXml("src/main/resources/cats.xml",
                 "src/main/resources/cats.xsl",
                 "src/main/resources/cats.html");
-         */
 
         System.out.println(XmlCatBuilder.validateXml(
                 "src/main/resources/cats.xml",
                 "src/main/resources/cats.xsd"));
+
+        XmlCatBuilder.readJaxb("src/main/resources/cats.xml").getCats().stream().forEach(
+                System.out::println
+        );
+         */
+
+        JaxbCat murzik = new JaxbCat("Мурзик","Манул", 10, true);
+        JaxbCat ramzes = new JaxbCat("Рамзес","Сфинкс", 2, true);
+        JaxbCat edward = new JaxbCat("Эдуард","Британец", 5, false);
+        ArrayList<JaxbCat> jaxbCats = new ArrayList<JaxbCat>();
+        //jaxbCats.
 
     }
 }

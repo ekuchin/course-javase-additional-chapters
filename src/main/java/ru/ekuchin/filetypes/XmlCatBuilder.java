@@ -5,6 +5,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -18,6 +21,10 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class XmlCatBuilder {
 
@@ -88,4 +95,24 @@ public class XmlCatBuilder {
             return false;
         }
     }
+
+    public static JaxbCatCollection readJaxb(String filename) throws Exception {
+        JAXBContext context = JAXBContext.newInstance(JaxbCatCollection.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        return (JaxbCatCollection) unmarshaller.unmarshal(new InputStreamReader(
+                new FileInputStream(filename), StandardCharsets.UTF_8));
+    }
+
+    public void writeJaxb(JaxbCatCollection cats, String filename) throws Exception {
+
+        JAXBContext context = JAXBContext.newInstance(JaxbCatCollection.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        // записать System.out
+        marshaller.marshal(cats, System.out);
+        // Из контекста получаем маршалер с помощью createMarshaller().
+        // устанавливаем свойство для получения форматированного вывода.
+        //m.marshal(bookstore, new File(BOOKSTORE_XML));
+    }
+
 }
