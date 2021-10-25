@@ -34,7 +34,13 @@ public class App
         //Стандартные пакеты и классы
         //Starter.demoStandardPackages();
 
-        //Работа с XML, JSON, Excel, Zip
-        Starter.demoFileTypes();
+        //Работа с XML
+        //Starter.demoFileTypesXML();
+
+        //Работа с JSON, Excel, Zip
+        Starter.demoFileTypesJSON();
+
+        //Работа с Excel, Zip
+
     }
 }

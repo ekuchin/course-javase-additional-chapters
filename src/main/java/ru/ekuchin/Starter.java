@@ -1,6 +1,8 @@
 package ru.ekuchin;
 
 import ru.ekuchin.files.Analyzer;
+import ru.ekuchin.filetypes.json.JsonCat;
+import ru.ekuchin.filetypes.json.JsonCatBuilder;
 import ru.ekuchin.filetypes.xml.JaxbCatCollection;
 import ru.ekuchin.filetypes.xml.XmlCat;
 import ru.ekuchin.filetypes.xml.XmlCatBuilder;
@@ -258,7 +260,7 @@ public class Starter {
             System.out.println(field.toString());
         }
     }
-    public static void demoFileTypes() throws Exception {
+    public static void demoFileTypesXML() throws Exception {
         XmlCat[] cats = XmlCatBuilder.readXML("src/main/resources/cats.xml");
         Arrays.stream(cats).forEach(System.out::println);
 
@@ -277,5 +279,11 @@ public class Starter {
         catsCollection.getCats().forEach(System.out::println);
 
         XmlCatBuilder.writeJaxb(catsCollection,"src/main/resources/newcat.xml");
+    }
+    public static void demoFileTypesJSON() throws Exception {
+        ArrayList<JsonCat> cats = JsonCatBuilder.readJson("src/main/resources/cats.json");
+        cats.forEach(System.out::println);
+
+        //JsonCatBuilder.writeJson(cats, "src/main/resources/newcat.json");
     }
 }
