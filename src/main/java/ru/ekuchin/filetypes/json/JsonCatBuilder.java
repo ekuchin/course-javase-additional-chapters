@@ -1,13 +1,11 @@
 package ru.ekuchin.filetypes.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.json.*;
 import javax.json.stream.JsonParser;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
