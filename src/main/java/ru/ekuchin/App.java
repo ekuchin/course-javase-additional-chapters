@@ -38,7 +38,10 @@ public class App
         //Starter.demoFileTypesXML();
 
         //Работа с JSON, Excel, Zip
-        Starter.demoFileTypesJSON();
+        //Starter.demoFileTypesJSON();
+
+        //Многопоточность
+        Starter.demoMultiThreading();
 
         //Работа с Excel, Zip
 

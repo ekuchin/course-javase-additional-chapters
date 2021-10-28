@@ -10,6 +10,7 @@ import ru.ekuchin.filetypes.xml.XmlCatBuilder;
 import ru.ekuchin.javadoc.DocumendedCat;
 import ru.ekuchin.lambda.Arithmetic;
 import ru.ekuchin.lambda.Calculator;
+import ru.ekuchin.multithreading.MyThread;
 import ru.ekuchin.packages.HandlerQueue;
 import ru.ekuchin.packages.HandlerStack;
 import ru.ekuchin.patterns.builder.Tree;
@@ -291,5 +292,16 @@ public class Starter {
         JacksonCat[] jacksonCats = JsonCatBuilder.readJackson("src/main/resources/cats.json");
         Arrays.stream(jacksonCats).forEach(System.out::println);
         JsonCatBuilder.writeJackson(jacksonCats, "src/main/resources/newcat.json");
+    }
+    public static void demoMultiThreading() throws InterruptedException {
+
+        MyThread myThread = new MyThread();
+        Thread second = new Thread(myThread);
+        second.start();
+
+        MyThread.doJob(1000);
+
+        second.join();
+        System.out.println("Все потоки завершены");
     }
 }
